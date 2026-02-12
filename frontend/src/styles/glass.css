@@ -1,0 +1,22 @@
+.glass {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.02)
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 0 40px rgba(0,255,200,0.05);
+}
+
+.glow {
+  box-shadow: 0 0 30px rgba(0,255,200,0.35);
+}
+
+.card {
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
