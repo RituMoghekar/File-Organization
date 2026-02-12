@@ -329,53 +329,53 @@ npm run dev
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         USER'S FILE SYSTEM                       │
+│                         USER'S FILE SYSTEM                      │
 │  /Users/alice/Documents/watched_folder/                         │
-│    ├── report.pdf                                                │
-│    ├── notes.txt                                                 │
-│    └── __semantic__/                                             │
+│    ├── report.pdf                                               │
+│    ├── notes.txt                                                │
+│    └── __semantic__/                                            │
 │         ├── Finance_Budget/  → symlink to report.pdf            │
 │         └── Research_Notes/  → symlink to notes.txt             │
 └─────────────────────────────────────────────────────────────────┘
                               ↕ (watchdog monitors)
 ┌─────────────────────────────────────────────────────────────────┐
-│                       SEFS BACKEND (Python)                      │
-│                                                                   │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
-│  │   watcher    │  │  extractor   │  │  embedder    │          │
-│  │  (watchdog)  │→ │ (PyMuPDF)    │→ │(transformers)│          │
-│  └──────────────┘  └──────────────┘  └──────────────┘          │
-│                                              ↓                    │
-│                                    ┌──────────────────┐          │
-│                                    │  vectorstore     │          │
-│                                    │  (ChromaDB)      │          │
-│                                    └──────────────────┘          │
-│                                              ↓                    │
-│                                    ┌──────────────────┐          │
-│                                    │   clusterer      │          │
-│                                    │ (HDBSCAN+UMAP)   │          │
-│                                    └──────────────────┘          │
-│                                              ↓                    │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
-│  │    syncer    │← │ broadcaster  │← │   FastAPI    │          │
-│  │  (symlinks)  │  │ (WebSocket)  │  │   (REST)     │          │
-│  └──────────────┘  └──────────────┘  └──────────────┘          │
+│                       SEFS BACKEND (Python)                     │
+│                                                                 │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │   watcher    │  │  extractor   │  │  embedder    │           │
+│  │  (watchdog)  │→ │ (PyMuPDF)    │→ │(transformers)│           │
+│  └──────────────┘  └──────────────┘  └──────────────┘           │
+│                                              ↓                  │
+│                                    ┌──────────────────┐         │
+│                                    │  vectorstore     │         │
+│                                    │  (ChromaDB)      │         │
+│                                    └──────────────────┘         │
+│                                              ↓                  │
+│                                    ┌──────────────────┐         │
+│                                    │   clusterer      │         │
+│                                    │ (HDBSCAN+UMAP)   │         │
+│                                    └──────────────────┘         │
+│                                              ↓                  │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │    syncer    │← │ broadcaster  │← │   FastAPI    │           │
+│  │  (symlinks)  │  │ (WebSocket)  │  │   (REST)     │           │
+│  └──────────────┘  └──────────────┘  └──────────────┘           │
 └─────────────────────────────────────────────────────────────────┘
                               ↕ (WebSocket connection)
 ┌─────────────────────────────────────────────────────────────────┐
-│                      SEFS FRONTEND (React)                       │
-│                                                                   │
+│                      SEFS FRONTEND (React)                      │
+│                                                                 │
 │  ┌────────────────────────────────────────────────────────────┐ │
 │  │          SemanticGraph.jsx (D3 Force Simulation)           │ │
-│  │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐      │ │
-│  │  │ Node 1  │──│ Node 2  │  │ Node 3  │──│ Node 4  │      │ │
-│  │  │(report) │  │ (notes) │  │(budget) │  │(draft)  │      │ │
-│  │  └─────────┘  └─────────┘  └─────────┘  └─────────┘      │ │
+│  │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐        │ │
+│  │  │ Node 1  │──│ Node 2  │  │ Node 3  │──│ Node 4  │        │ │
+│  │  │(report) │  │ (notes) │  │(budget) │  │(draft)  │        │ │
+│  │  └─────────┘  └─────────┘  └─────────┘  └─────────┘        │ │
 │  │      Cluster Hull: Finance       Cluster Hull: Research    │ │
 │  └────────────────────────────────────────────────────────────┘ │
-│                                                                   │
+│                                                                 │
 │  Sidebar: ClusterList | SearchBar | ActivityFeed                │
-│  Drawer:  FilePreviewPanel                                       │
+│  Drawer:  FilePreviewPanel                                      │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
